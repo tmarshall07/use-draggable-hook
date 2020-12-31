@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 
-const useDraggable = (ref, deps = [], options) => {
+const useDrag = (ref, deps = [], options) => {
   const {
     onMouseDown = () => {},
     onMouseUp = () => {},
     onMouseMove = () => {},
     onDrag = () => {},
-  } = options;
+  } = options;  
 
   const [isDragging, setIsDragging] = useState(false);
 
@@ -23,8 +23,6 @@ const useDraggable = (ref, deps = [], options) => {
   };
 
   const handleMouseMove = (e) => {
-    e.preventDefault();
-
     onMouseMove(e);
 
     if (isDragging) {
@@ -52,4 +50,4 @@ const useDraggable = (ref, deps = [], options) => {
   return { isDragging };
 };
 
-export default useDraggable;
+export default useDrag;
