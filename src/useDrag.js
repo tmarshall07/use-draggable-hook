@@ -2,28 +2,28 @@ import { useState, useEffect } from 'react';
 
 const useDrag = (ref, deps = [], options) => {
   const {
-    onMouseDown = () => {},
-    onMouseUp = () => {},
-    onMouseMove = () => {},
+    onPointerDown = () => {},
+    onPointerUp = () => {},
+    onPointerMove = () => {},
     onDrag = () => {},
   } = options;  
 
   const [isDragging, setIsDragging] = useState(false);
 
-  const handleMouseDown = (e) => {
+  const handlePointerDown = (e) => {
     setIsDragging(true);
 
-    onMouseDown(e);
+    onPointerDown(e);
   };
 
-  const handleMouseUp = (e) => {
+  const handlePointerUp = (e) => {
     setIsDragging(false);
 
-    onMouseUp(e);
+    onPointerUp(e);
   };
 
-  const handleMouseMove = (e) => {
-    onMouseMove(e);
+  const handlePointerMove = (e) => {
+    onPointerMove(e);
 
     if (isDragging) {
       onDrag(e);
@@ -33,14 +33,14 @@ const useDrag = (ref, deps = [], options) => {
   useEffect(() => {
     const element = ref.current;
     if (element) {
-      element.addEventListener('mousedown', handleMouseDown);
-      element.addEventListener('mouseup', handleMouseUp);
-      element.addEventListener('mousemove', handleMouseMove);
+      element.addEventListener('pointerdown', handlePointerDown);
+      element.addEventListener('pointerup', handlePointerUp);
+      element.addEventListener('pointermove', handlePointerMove);
 
       return () => {
-        element.removeEventListener('mousedown', handleMouseDown);
-        element.removeEventListener('mouseup', handleMouseUp);
-        element.removeEventListener('mousemove', handleMouseMove);
+        element.removeEventListener('pointerdown', handlePointerDown);
+        element.removeEventListener('pointerup', handlePointerUp);
+        element.removeEventListener('pointermove', handlePointerMove);
       };
     }
 
